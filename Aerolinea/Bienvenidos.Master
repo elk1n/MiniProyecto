@@ -1,0 +1,151 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Bienvenidos.master.cs"
+    Inherits="Aerolinea.Bienvenidos" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Aerolinea</title>
+    <link type="text/css" rel="stylesheet" href="css/bootstrap.css" />
+    <link type="text/css" rel="stylesheet" href="css/normalize.css" />
+    <link rel="icon" type="image/png" href="img/Logo.gif" />
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <div class="container">
+            <div class="row-fluid">
+                <div class="span12" id="topheader">
+                    <h1>
+                        Bienvenido a Oceanic Airlines</h1>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="well">
+                    <div id="myCarousel" class="carousel slide">
+                        <ol class="carousel-indicators">
+                            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#myCarousel" data-slide-to="1"></li>
+                            <li data-target="#myCarousel" data-slide-to="2"></li>
+                        </ol>
+                        <!-- Carousel items -->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <div class="row-fluid">
+                                    <div class="span3">
+                                        <a href="#x" class="thumbnail">
+                                            <img src="img/Logo.gif" alt="Image" style="max-width: 100%;" /></a></div>
+                                    <div class="span3">
+                                        <a href="#x" class="thumbnail">
+                                            <img src="img/Oceanic1.jpg" alt="Image" style="max-width: 100%;" /></a></div>
+                                    <div class="span3">
+                                        <a href="#x" class="thumbnail">
+                                            <img src="img/Poster.jpg" alt="Image" style="max-width: 100%;" /></a></div>
+                                    <div class="span3">
+                                        <a href="#x" class="thumbnail">
+                                            <img src="img/Avion.png" alt="Image" style="max-width: 100%;" /></a></div>
+                                </div>
+                                <!--/row-fluid-->
+                            </div>
+                            <!--/item-->
+                            <div class="item">
+                                <div class="row-fluid">
+                                    <div class="span3">
+                                        <a href="#x" class="thumbnail">
+                                            <img src="img/Playa.jpg" alt="Image" style="max-width: 100%;" /></a></div>
+                                    <div class="span3">
+                                        <a href="#x" class="thumbnail">
+                                            <img src="img/Perrito.jpg" alt="Image" style="max-width: 100%;" /></a></div>
+                                    <div class="span3">
+                                        <a href="#x" class="thumbnail">
+                                            <img src="img/Mar.jpg" alt="Image" style="max-width: 100%;" /></a></div>
+                                    <div class="span3">
+                                        <a href="#x" class="thumbnail">
+                                            <img src="img/Hotel.jpg" alt="Image" style="max-width: 100%;" /></a></div>
+                                </div>
+                                <!--/row-fluid-->
+                            </div>
+                            <!--/item-->
+                            <div class="item">
+                                <div class="row-fluid">
+                                    <div class="span3">
+                                        <a href="#x" class="thumbnail">
+                                            <img src="img/Piscina.jpg" alt="Image" style="max-width: 100%;" /></a></div>
+                                    <div class="span3">
+                                        <a href="#x" class="thumbnail">
+                                            <img src="img/Hotel2.jpg" alt="Image" style="max-width: 100%;" /></a></div>
+                                    <div class="span3">
+                                        <a href="#x" class="thumbnail">
+                                            <img src="img/Piscinas.jpeg" alt="Image" style="max-width: 100%;" /></a></div>
+                                    <div class="span3">
+                                        <a href="#x" class="thumbnail">
+                                            <img src="img/Logo.gif" alt="Image" style="max-width: 100%;" /></a></div>
+                                </div>
+                                <!--/row-fluid-->
+                            </div>
+                            <!--/item-->
+                        </div>
+                        <!--/carousel-inner-->
+                        <a class="left carousel-control" href="#myCarousel" data-slide="prev">‹</a> <a class="right carousel-control"
+                            href="#myCarousel" data-slide="next">›</a>
+                    </div>
+                    <!--/myCarousel-->
+                </div>
+                <!--/well-->
+                <!-- This is just a little bit of custom CSS code to enhance things. Feel free to place this in your main CSS file. I've commented to say what each bit does. -->
+                <style type="text/css">
+                    /* Removes the default 20px margin and creates some padding space for the indicators and controls */
+                    .carousel
+                    {
+                        margin-bottom: 0;
+                        padding: 0 40px 30px 40px;
+                    }
+                    /* Reposition the controls slightly */
+                    .carousel-control
+                    {
+                        left: -12px;
+                    }
+                    .carousel-control.right
+                    {
+                        right: -12px;
+                    }
+                    /* Changes the position of the indicators */
+                    .carousel-indicators
+                    {
+                        right: 50%;
+                        top: auto;
+                        bottom: 0px;
+                        margin-right: -19px;
+                    }
+                    /* Changes the colour of the indicators */
+                    .carousel-indicators li
+                    {
+                        background: #c0c0c0;
+                    }
+                    .carousel-indicators .active
+                    {
+                        background: #333333;
+                    }
+                </style>
+                <!-- Call jQuery 1.9, call bootstrap.js and run the carousel when the DOM is ready. Slide every 10 seconds. -->
+                <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $('#myCarousel').carousel({
+                            interval: 5000
+                        })
+                    });
+                </script>
+                
+                <div class="span12">               
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+
+                    </asp:ContentPlaceHolder>
+                </div>
+            </div>
+        </div>
+    </div>
+    </form>
+    <script type="text/javascript" src='<%# ResolveUrl ("~/Js/jquery-1.2.3.min.js") %>'></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+</body>
+</html>
