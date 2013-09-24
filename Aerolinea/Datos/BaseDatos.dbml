@@ -1,5 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="AEROLINEA" Class="BaseDatosDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=SENA-PC\SQLEXPRESS;Initial Catalog=AEROLINEA;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="AEROLINEAConnectionString" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=ELK1N\SQLSERVER;Initial Catalog=AEROLINEA;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="AEROLINEAConnectionString1" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.ADMINISTRADOR" Member="ADMINISTRADOR">
+    <Type Name="ADMINISTRADOR">
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Usuario" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Contrasenia" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="ADMINISTRADOR_VUELOS" Member="VUELOS" ThisKey="Usuario" OtherKey="IdAdmin" Type="VUELOS" />
+    </Type>
+  </Table>
   <Table Name="dbo.VUELOS" Member="VUELOS">
     <Type Name="VUELOS">
       <Column Name="IdVuelo" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -10,14 +18,6 @@
       <Association Name="VUELOS_TICKET" Member="TICKET" ThisKey="IdVuelo" OtherKey="IdVuelo" Type="TICKET" />
       <Association Name="ADMINISTRADOR_VUELOS" Member="ADMINISTRADOR" ThisKey="IdAdmin" OtherKey="Usuario" Type="ADMINISTRADOR" IsForeignKey="true" />
       <Association Name="TRAYECTOS_VUELOS" Member="TRAYECTOS" ThisKey="Trayecto" OtherKey="IdTrayecto" Type="TRAYECTOS" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.ADMINISTRADOR" Member="ADMINISTRADOR">
-    <Type Name="ADMINISTRADOR">
-      <Column Name="Nombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Usuario" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Contrasenia" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Association Name="ADMINISTRADOR_VUELOS" Member="VUELOS" ThisKey="Usuario" OtherKey="IdAdmin" Type="VUELOS" />
     </Type>
   </Table>
   <Table Name="dbo.AERONAVES" Member="AERONAVES">
@@ -92,6 +92,62 @@
       <Association Name="TICKET_VOLETO1" Member="TICKET1" ThisKey="TicketRegreso" OtherKey="CodigoTicket" Type="TICKET" IsForeignKey="true" />
     </Type>
   </Table>
+  <Function Name="dbo.getAsientos" Method="getAsientos" IsComposable="true">
+    <Parameter Name="codigoTicket" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.getUnidades" Method="getUnidades" IsComposable="true">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.getAutonomia" Method="getAutonomia" IsComposable="true">
+    <Parameter Name="id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.getCarga" Method="getCarga" IsComposable="true">
+    <Parameter Name="ticket" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Double" />
+  </Function>
+  <Function Name="dbo.getDuracion" Method="getDuracion" IsComposable="true">
+    <Parameter Name="id" Type="System.String" DbType="VarChar(40)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.getFechaViaje" Method="getFechaViaje" IsComposable="true">
+    <Parameter Name="idTicket" Type="System.Int32" DbType="Int" />
+    <Return Type="System.DateTime" />
+  </Function>
+  <Function Name="dbo.getHoras" Method="getHoras" IsComposable="true">
+    <Parameter Name="seconds" Type="System.Int32" DbType="Int" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.getIdPasajero" Method="getIdPasajero" IsComposable="true">
+    <Parameter Name="usuario" Type="System.String" DbType="VarChar(20)" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.getMillas" Method="getMillas" IsComposable="true">
+    <Parameter Name="codigoTicket" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.getMillasPasajero" Method="getMillasPasajero" IsComposable="true">
+    <Parameter Name="usuario" Type="System.String" DbType="VarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.getPesoTicket" Method="getPesoTicket" IsComposable="true">
+    <Parameter Name="ticket" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.getPrecio" Method="getPrecio" IsComposable="true">
+    <Parameter Name="codigoTicket" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Decimal" />
+  </Function>
+  <Function Name="dbo.getTemporada" Method="getTemporada" IsComposable="true">
+    <Parameter Name="codigoTicket" Type="System.Int32" DbType="Int" />
+    <Return Type="System.String" />
+  </Function>
+  <Function Name="dbo.getTime" Method="getTime" IsComposable="true">
+    <Parameter Name="seconds" Type="System.Int32" DbType="Int" />
+    <Return Type="System.String" />
+  </Function>
   <Function Name="dbo.clientesFrecuentes" Method="clientesFrecuentes">
     <Parameter Name="numeroClientes" Type="System.String" DbType="VarChar(8)" Direction="InOut" />
     <ElementType Name="clientesFrecuentesResult">
@@ -259,61 +315,5 @@
       <Column Name="Asientos" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="Referencia" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
     </ElementType>
-  </Function>
-  <Function Name="dbo.getAsientos" Method="getAsientos" IsComposable="true">
-    <Parameter Name="codigoTicket" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.getUnidades" Method="getUnidades" IsComposable="true">
-    <Parameter Name="id" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.getAutonomia" Method="getAutonomia" IsComposable="true">
-    <Parameter Name="id" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.getCarga" Method="getCarga" IsComposable="true">
-    <Parameter Name="ticket" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Double" />
-  </Function>
-  <Function Name="dbo.getDuracion" Method="getDuracion" IsComposable="true">
-    <Parameter Name="id" Type="System.String" DbType="VarChar(40)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.getFechaViaje" Method="getFechaViaje" IsComposable="true">
-    <Parameter Name="idTicket" Type="System.Int32" DbType="Int" />
-    <Return Type="System.DateTime" />
-  </Function>
-  <Function Name="dbo.getHoras" Method="getHoras" IsComposable="true">
-    <Parameter Name="seconds" Type="System.Int32" DbType="Int" />
-    <Return Type="System.String" />
-  </Function>
-  <Function Name="dbo.getIdPasajero" Method="getIdPasajero" IsComposable="true">
-    <Parameter Name="usuario" Type="System.String" DbType="VarChar(20)" />
-    <Return Type="System.String" />
-  </Function>
-  <Function Name="dbo.getMillas" Method="getMillas" IsComposable="true">
-    <Parameter Name="codigoTicket" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.getMillasPasajero" Method="getMillasPasajero" IsComposable="true">
-    <Parameter Name="usuario" Type="System.String" DbType="VarChar(20)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.getPesoTicket" Method="getPesoTicket" IsComposable="true">
-    <Parameter Name="ticket" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.getPrecio" Method="getPrecio" IsComposable="true">
-    <Parameter Name="codigoTicket" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Decimal" />
-  </Function>
-  <Function Name="dbo.getTemporada" Method="getTemporada" IsComposable="true">
-    <Parameter Name="codigoTicket" Type="System.Int32" DbType="Int" />
-    <Return Type="System.String" />
-  </Function>
-  <Function Name="dbo.getTime" Method="getTime" IsComposable="true">
-    <Parameter Name="seconds" Type="System.Int32" DbType="Int" />
-    <Return Type="System.String" />
   </Function>
 </Database>

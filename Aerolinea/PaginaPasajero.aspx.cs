@@ -71,19 +71,17 @@ namespace Aerolinea
                     if (ddl_ida.SelectedValue == "0")
                     {
                         datos.registrarVoleto(datos.getIdPasajero(variables.Usuario), decimal.Parse(valorTotal.ToString()), false, idTicket, null, double.Parse(txt_pesoIda.Text), ref mensaje);
-                        lbl_mensajes.Text = mensaje;
-                        lbl_mensajeFinal.Text = "El valor del voleto es: " + valorTotal + "<br/>El total de sus millas es: " + datos.getMillasPasajero(variables.Usuario).Value;
-
+                        lbl_mensajes.Text = mensaje;                       
                     }
                     else if (ddl_ida.SelectedValue == "1")
                     {
                         datos.registrarVoleto(datos.getIdPasajero(variables.Usuario), decimal.Parse(valorTotal.ToString()), true, idTicket, idTicketRegreso, double.Parse(txt_pesoIda.Text) + double.Parse(txt_pesoRegreso.Text), ref mensaje);
-                        lbl_mensajes.Text = mensaje;
-                        lbl_mensajeFinal.Text = "El valor del voleto es: " + valorTotal + "<br/>El total de sus millas es: " + datos.getMillasPasajero(variables.Usuario).Value;
+                        lbl_mensajes.Text = mensaje;                     
                     }
                     if (mensaje == "Su voleto se ha generado correctamente")
                     {
                         setDatos();
+                        lbl_mensajeFinal.Text = "El valor del voleto es: " + valorTotal + "<br/>El total de sus millas es: " + datos.getMillasPasajero(variables.Usuario).Value;
                     }
                 }
             }

@@ -164,7 +164,7 @@
                                     DataSourceID="SqlDataSource1" DataTextField="Trayecto" DataValueField="IdVuelo">
                                 </asp:DropDownList>
                                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
-                                    ConnectionString="<%$ ConnectionStrings:AEROLINEAConnectionString %>" 
+                                    ConnectionString="<%$ ConnectionStrings:AEROLINEAConnectionString2 %>" 
                                     SelectCommand="listarVuelosRegistro" SelectCommandType="StoredProcedure">
                                 </asp:SqlDataSource>
                                 &emsp;&emsp;
