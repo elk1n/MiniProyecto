@@ -67,8 +67,6 @@ namespace Aerolinea
                     ddl_minutos.Items.Add(i.ToString());
                 }
             }
-
-            listarVuelosRegistro();
         }
 
         protected void Button1_Click(object sender, EventArgs e)
@@ -304,14 +302,6 @@ namespace Aerolinea
             grd_vuelos.DataBind();       
        }
 
-        //Llena el dropDown del los vuelos (lo que aun no estan asignados a un ticket)..
-        private void listarVuelosRegistro() {
-            ddl_vuelo.DataSource = datos.listarVuelosRegistro();
-            ddl_vuelo.DataTextField = "Trayecto";
-            ddl_vuelo.DataValueField = "IdVuelo";
-            ddl_vuelo.DataBind();
-        }
-
         // Selecciona la temporada dependiedo de la fecha del sistema..
         private void temporada()
         {
@@ -353,7 +343,6 @@ namespace Aerolinea
                      lbl_fechaHora.Text = con.FechaHoraViaje.ToString();
           
                  }
-
         }
 
         protected void cerrarSesion(object sender, EventArgs e){
@@ -367,6 +356,20 @@ namespace Aerolinea
             registrar.restablecerCombustible(idAvion, idAvion);
             btn_recargar.Visible = false;
             lbl_errorTicket.Text = "";
+        }
+
+        protected void Button3_Click(object sender, EventArgs e)
+        {
+            lbl_vuelo.Text = ddl_vuelo.SelectedValue;
+
+            var con = (
+                   from P in datos.GetTable<VUELOS>()
+                   where P.IdVuelo == int.Parse(ddl_vuelo.SelectedValue)
+                   select P).Single();
+            {
+                lbl_fechaHora.Text = con.FechaHoraViaje.ToString();
+
+            }
         }
 
     }

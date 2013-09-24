@@ -136,7 +136,8 @@
                                     onselectedindexchanged="ddl_aeronave_SelectedIndexChanged">
                                 </asp:DropDownList>&nbsp;&nbsp;&emsp;&nbsp;&nbsp;&emsp;&emsp;
 
-                                <asp:DropDownList ID="ddl_unidades" runat="server" Width="100px">
+                                <asp:DropDownList ID="ddl_unidades" runat="server" Width="100px" 
+                                    AutoPostBack="True">
                                 </asp:DropDownList>&nbsp;&emsp;<asp:Label ID="lbl_validarUnidad" runat="server" ForeColor="#CC0000"></asp:Label>
                                 <asp:LinqDataSource ID="Avion" runat="server" ContextTypeName="Aerolinea.Datos.BaseDatosDataContext"
                                     EntityTypeName="" Select="new (Tipo, IdAeronave)" TableName="AERONAVES">
@@ -149,7 +150,7 @@
                                 Piloto</label>
                             <div class="controls">
                                 <asp:DropDownList ID="ddl_piloto" runat="server" DataSourceID="Pilotos" DataTextField="Nombre"
-                                    DataValueField="Usuario" Width="150px">
+                                    DataValueField="Usuario" Width="150px" AutoPostBack="True">
                                 </asp:DropDownList>
                                 <asp:LinqDataSource ID="Pilotos" runat="server" ContextTypeName="Aerolinea.Datos.BaseDatosDataContext"
                                     EntityTypeName="" Select="new (Nombre, Usuario)" TableName="PILOTOS">
@@ -159,8 +160,14 @@
                         <!-- Save card -->
                         <div class="control-group">Trayecto&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;Vuelo&emsp;&emsp;&emsp;&emsp;&emsp;Fecha y Hora<div class="controls">
                                 <asp:DropDownList ID="ddl_vuelo" runat="server" Width="150px" AutoPostBack="True" 
-                                    onselectedindexchanged="ddl_vuelo_SelectedIndexChanged">
-                                </asp:DropDownList>&emsp;&emsp;
+                                    onselectedindexchanged="ddl_vuelo_SelectedIndexChanged" 
+                                    DataSourceID="SqlDataSource1" DataTextField="Trayecto" DataValueField="IdVuelo">
+                                </asp:DropDownList>
+                                <asp:SqlDataSource ID="SqlDataSource1" runat="server" 
+                                    ConnectionString="<%$ ConnectionStrings:AEROLINEAConnectionString %>" 
+                                    SelectCommand="listarVuelosRegistro" SelectCommandType="StoredProcedure">
+                                </asp:SqlDataSource>
+                                &emsp;&emsp;
                             <asp:Label ID="lbl_vuelo" runat="server"  Width="60" Text=""></asp:Label>&emsp;&emsp;&emsp;
                             <asp:Label ID="lbl_fechaHora" runat="server" Width="265px"></asp:Label>
                                 

@@ -1,13 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="AEROLINEA" Class="BaseDatosDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=ELK1N\SQLSERVER;Initial Catalog=AEROLINEA;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="AEROLINEAConnectionString1" Provider="System.Data.SqlClient" />
-  <Table Name="dbo.ADMINISTRADOR" Member="ADMINISTRADOR">
-    <Type Name="ADMINISTRADOR">
-      <Column Name="Nombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
-      <Column Name="Usuario" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
-      <Column Name="Contrasenia" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Association Name="ADMINISTRADOR_VUELOS" Member="VUELOS" ThisKey="Usuario" OtherKey="IdAdmin" Type="VUELOS" />
-    </Type>
-  </Table>
+  <Connection Mode="WebSettings" ConnectionString="Data Source=SENA-PC\SQLEXPRESS;Initial Catalog=AEROLINEA;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="AEROLINEAConnectionString" Provider="System.Data.SqlClient" />
   <Table Name="dbo.VUELOS" Member="VUELOS">
     <Type Name="VUELOS">
       <Column Name="IdVuelo" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
@@ -18,6 +10,14 @@
       <Association Name="VUELOS_TICKET" Member="TICKET" ThisKey="IdVuelo" OtherKey="IdVuelo" Type="TICKET" />
       <Association Name="ADMINISTRADOR_VUELOS" Member="ADMINISTRADOR" ThisKey="IdAdmin" OtherKey="Usuario" Type="ADMINISTRADOR" IsForeignKey="true" />
       <Association Name="TRAYECTOS_VUELOS" Member="TRAYECTOS" ThisKey="Trayecto" OtherKey="IdTrayecto" Type="TRAYECTOS" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ADMINISTRADOR" Member="ADMINISTRADOR">
+    <Type Name="ADMINISTRADOR">
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50)" CanBeNull="true" />
+      <Column Name="Usuario" Type="System.String" DbType="VarChar(20) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Contrasenia" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Association Name="ADMINISTRADOR_VUELOS" Member="VUELOS" ThisKey="Usuario" OtherKey="IdAdmin" Type="VUELOS" />
     </Type>
   </Table>
   <Table Name="dbo.AERONAVES" Member="AERONAVES">
@@ -174,6 +174,21 @@
     <Parameter Name="horasVuelo" Type="System.Double" DbType="Float" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.registrarTicket" Method="registrarTicket">
+    <Parameter Name="codigoTiquete" Type="System.Int32" DbType="Int" />
+    <Parameter Name="idAeronave" Type="System.Int32" DbType="Int" />
+    <Parameter Name="piloto" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="idVuelo" Type="System.Int32" DbType="Int" />
+    <Parameter Name="mensaje" Type="System.String" DbType="VarChar(64)" Direction="InOut" />
+    <ElementType Name="registrarTicketResult">
+      <Column Name="Identificacion" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Usuario" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Contrasenia" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Millas" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Frecuente" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.registrarTrayecto" Method="registrarTrayecto">
     <Parameter Name="idTrayecto" Type="System.String" DbType="VarChar(40)" />
     <Parameter Name="origen" Type="System.String" DbType="VarChar(32)" />
@@ -265,6 +280,10 @@
     <Parameter Name="id" Type="System.String" DbType="VarChar(40)" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.getFechaViaje" Method="getFechaViaje" IsComposable="true">
+    <Parameter Name="idTicket" Type="System.Int32" DbType="Int" />
+    <Return Type="System.DateTime" />
+  </Function>
   <Function Name="dbo.getHoras" Method="getHoras" IsComposable="true">
     <Parameter Name="seconds" Type="System.Int32" DbType="Int" />
     <Return Type="System.String" />
@@ -296,24 +315,5 @@
   <Function Name="dbo.getTime" Method="getTime" IsComposable="true">
     <Parameter Name="seconds" Type="System.Int32" DbType="Int" />
     <Return Type="System.String" />
-  </Function>
-  <Function Name="dbo.registrarTicket" Method="registrarTicket">
-    <Parameter Name="codigoTiquete" Type="System.Int32" DbType="Int" />
-    <Parameter Name="idAeronave" Type="System.Int32" DbType="Int" />
-    <Parameter Name="piloto" Type="System.String" DbType="VarChar(20)" />
-    <Parameter Name="idVuelo" Type="System.Int32" DbType="Int" />
-    <Parameter Name="mensaje" Type="System.String" DbType="VarChar(64)" Direction="InOut" />
-    <ElementType Name="registrarTicketResult">
-      <Column Name="Identificacion" Type="System.String" DbType="VarChar(15) NOT NULL" CanBeNull="false" />
-      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="Usuario" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="Contrasenia" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="Millas" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="Frecuente" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.getFechaViaje" Method="getFechaViaje" IsComposable="true">
-    <Parameter Name="idTicket" Type="System.Int32" DbType="Int" />
-    <Return Type="System.DateTime" />
   </Function>
 </Database>
